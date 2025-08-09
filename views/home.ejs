@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> <%= RESTAURANT.name %></title>
+  <title><%= RESTAURANT.name %></title>
 </head>
 <body>
-    <%- include('./partials/nav.ejs') %>
+  <%- include('./partials/nav') %>
+
   <h1>Home Page</h1>
 
 
- 
 
-        <%= RESTAURANT.name %>
-        <%= RESTAURANT.address %>
-        <%= RESTAURANT.phone %>
+  <h2><%= RESTAURANT.name %></h2>
+  <p><strong>Address:</strong> <%= RESTAURANT.address %></p>
+  <p><strong>Phone:</strong> <%= RESTAURANT.phone %></p>
 
-
-
-
+  <% if (RESTAURANT.isOpen) { %>
+    <p>Yes we are open!</p>
+  <% } else { %>
+    <p>Sorry, we are closed.</p>
+  <% } %>
 </body>
 </html>

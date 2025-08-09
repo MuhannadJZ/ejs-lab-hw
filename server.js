@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+app.set('view engine', 'ejs');
+
+
 
 
 const RESTAURANT = {
@@ -49,31 +52,27 @@ const RESTAURANT = {
       details: 'Crispy and lightly seasoned string bean fries, served in a pattern for a fun twist.'
     }
   ]
+};
 
-}
+app.get('/', (req, res) => {
+  res.render('home', { RESTAURANT });
+});
 
-app.get("/",(req,res)=>{
-    res.render("home.ejs", {RESTAURANT: RESTAURANT})
-})
-app.get("/menu",(req,res)=>{
-    res.render("menu.ejs")
-})
+
+
+app.get('/menu', (req, res) => {
+  res.render('menu', { menu: RESTAURANT.menu });
+});
+
+
+
+app.get('/menu/:category', (req, res) => {
+  const category = req.params.category;
+  const filteredMenu = RESTAURANT.menu.filter(item => item.category === category);
+  const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+  res.render('category', { menuItems: filteredMenu, category: capitalizedCategory });
+});
 
 app.listen(3000, () => {
-    console.log('Listening on 3000')
-})
-
-app.get("/menu/:category",(req,res)=>{
-
-  // check the req.params for the value  
-    console.log(req.params)
-
-    const menuItems = RESTAURANT.menu.filter((item)=>{
-        return item.category == req.params.category
-    })
-    console.log(menuItems)
-    res.render("category.ejs",{menuItems:menuItems})
-})
-  // use .filter() function from javascript to return only the menu items that match the category
-
-  // send that to the category.ejs file 
+  console.log('Server listening on port 3000');
+});

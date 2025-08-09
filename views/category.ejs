@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category for the RESTAURANT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= category %> Menu</title>
 </head>
 <body>
-    
-    <%- include("./partials/navbar") %>
+  <%- include('./partials/nav') %>
 
+  <h1><%= category %></h1>
 
-
-    <h1>Categories</h1>
-
-   <% RESTAURANT.menu.forEach((element)=>{ %>
-    <p> <%=element.rating%></p>
-    <p> <%=element.price%></p>
-    <p> <%=element.name%></p>
-    <p> <%=element.menu%></p>
-
+  <% menuItems.forEach(item => { %>
+    <p><strong><%= item.name %></strong> - $<%= item.price.toFixed(2) %></p>
+    <p>Rating: <%= item.rating %>/5</p>
+    <p><%= item.details %></p>
+  <% }) %>
 </body>
 </html>
